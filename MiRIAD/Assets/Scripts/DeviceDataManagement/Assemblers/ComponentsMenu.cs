@@ -52,7 +52,7 @@ public class ComponentsMenu : MonoBehaviour
         newComponent.transform.parent = gameObject.transform;
         Vector3 correctLocation = new Vector3(-162f, currentY, -18f);
         newComponent.transform.localPosition = correctLocation;
-        StartCoroutine(PutBackWhereItGoes(newComponent, correctLocation));//never runs
+        StartCoroutine(PutBackWhereItGoes(newComponent, correctLocation));
         //newComponent.transform.LookAt(Vector3.zero);
         newComponent.transform.rotation = newComponent.transform.parent.rotation;
         currentY-=yInterval;

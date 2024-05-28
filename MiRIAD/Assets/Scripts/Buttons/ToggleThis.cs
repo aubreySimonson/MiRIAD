@@ -21,9 +21,11 @@ public class ToggleThis : MonoBehaviour
 
     //this is an annoying workaround to deal with the way that grabbing things works in the XRTK
     public void AddRemovedItemsToCollector(){
-      foreach(GameObject gO in generatorMenu.itemsRemovedFromList){
-        gO.transform.parent = generatorMenu.collectorObject.transform;
-        generatorMenu.itemsRemovedFromList.Remove(gO);
+      if(generatorMenu!=null){
+        foreach(GameObject gO in generatorMenu.itemsRemovedFromList){
+          gO.transform.parent = generatorMenu.collectorObject.transform;
+          generatorMenu.itemsRemovedFromList.Remove(gO);
+        }
       }
     }
 }

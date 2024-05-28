@@ -2332,8 +2332,8 @@ MonoBehaviour:
   parentNode: {fileID: 0}
   parent: {fileID: 695573984352589106}
   allSampleTypes: []
-  sampleTypePrefab: {fileID: 0}
-  floatPrefab: {fileID: 0}
+  sampleTypePrefab: {fileID: 8782304135012562511, guid: 7070b028961354b8a89baa5f0bb166f0, type: 3}
+  floatPrefab: {fileID: 8782304135012562511, guid: 7070b028961354b8a89baa5f0bb166f0, type: 3}
   generatorMenu: {fileID: 8521374098666177064}
   currentY: 65
   yInterval: 120

@@ -36,22 +36,27 @@ public class SampleTypesMenu : MonoBehaviour
     }
 
     public void AssembleSamples(){
+      Debug.Log("Finding samples on ", this);//runs
       FindSamples(parentNode);//this is the correct node
       foreach(SampleType sampleType in allSampleTypes){
         GameObject newSampleType;
-        if(sampleType is SampleTypeFloat){
-          newSampleType = Instantiate(floatPrefab);
-          newSampleType.GetComponent<FloatEditMenu>().associatedNode = (SampleTypeFloat)sampleType;//somewhat fragile
-        }
-        else{
+        //put the commented out stuff back after we have a working float prefab
+        // if(sampleType is SampleTypeFloat){
+        //   newSampleType = Instantiate(floatPrefab);
+        //   newSampleType.GetComponent<FloatEditMenu>().associatedNode = (SampleTypeFloat)sampleType;//somewhat fragile//has come back to bite you in the ass
+        // }
+        //else{
           newSampleType = Instantiate(sampleTypePrefab);
-        }
+          Debug.Log("We've instantiated a sampletype at " + newSampleType.transform.position);
+        //}
         generatorMenu.menuItems.Add(newSampleType);
         //...and then you need to do some magic to make them stack correctly, and get the name right...
         newSampleType.transform.parent = gameObject.transform;
-        newSampleType.transform.localPosition = new Vector3(-0.25f, currentY, 0.0f);
-        //newSampleType.transform.transform.LookAt(Vector3.zero);
         newSampleType.transform.rotation = newSampleType.transform.parent.rotation;
+        newSampleType.transform.localPosition = new Vector3(-150.0f, currentY, 0.0f);
+        newSampleType.GetComponent<PositionMonitor>().SetCorrectPosition();
+        Debug.Log("The position of the sample type has been set to " + newSampleType.transform.localPosition);//it gets put somewhere else...
+        //newSampleType.transform.transform.LookAt(Vector3.zero);
         currentY-=yInterval;
         //change the label to the name-- there must be better ways of doing this...
         SetSampleTypeName(newSampleType, sampleType.sampleTypeName);
@@ -69,14 +74,18 @@ public class SampleTypesMenu : MonoBehaviour
 
     //how this works is /very/ different from how it was for components...
     public void FindSamples(AbstractNode thisNode){
+      Debug.Log("Find samples is being given this thing" + thisNode, this);//runs, and it is being given an abstract node
       //this assumes that no sample types will be childen of other sample types
-      if(thisNode.gameObject.GetComponent<SampleType>() != null){
+      if(thisNode.gameObject.GetComponent<SampleType>() != null){//this, of all things, somehow gives us a null exception
         allSampleTypes.Add(thisNode);
       }
       else{
         if(thisNode.childNodes.Count!=0){
           foreach(AbstractNode childNode in thisNode.childNodes){//not relying on the scene hierarchy
-            FindSamples(childNode);
+            if(childNode!=null){
+              Debug.Log("Calling FindSamples on " + childNode);
+              FindSamples(childNode);
+            }
           }//end foreach
         }//end if
       }//end else

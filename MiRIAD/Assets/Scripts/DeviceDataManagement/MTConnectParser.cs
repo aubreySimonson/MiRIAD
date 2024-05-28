@@ -228,12 +228,13 @@ public class MTConnectParser : MonoBehaviour
       thisSampleType.numberOfSamples++;
       //create the sample and add it to the sample type
       //you should probably change this to work with the add correct node type function at some point
-      GameObject sampleNode = Instantiate(nodePrefab);//instantiate an empty game object
-      sampleNode.transform.parent = thisSampleType.gameObject.transform;//samples are children of sample types
-      Sample sample = sampleNode.AddComponent<Sample>();
-      if(childNode.Attributes["dataItemId"]!=null){
-        sample.dataItemId = childNode.Attributes["dataItemId"].Value;
-      }
+      //turning off for a bit while we try to get the menus working again
+      // GameObject sampleNode = Instantiate(nodePrefab);//instantiate an empty game object
+      // sampleNode.transform.parent = thisSampleType.gameObject.transform;//samples are children of sample types
+      // Sample sample = sampleNode.AddComponent<Sample>();
+      // if(childNode.Attributes["dataItemId"]!=null){
+      //   sample.dataItemId = childNode.Attributes["dataItemId"].Value;
+      // }
       //thisSampleType.storedSamples.Add(sample);
 
       //time stamp things
@@ -243,7 +244,7 @@ public class MTConnectParser : MonoBehaviour
         if(thisSampleType.lastTimeStamp == null || timeStamp>thisSampleType.lastTimeStamp){
           //Debug.Log("timestamp: " + timeStamp);
           thisSampleType.lastTimeStamp = timeStamp;
-          sample.timeStamp = timeStamp;
+          //sample.timeStamp = timeStamp;
           if(thisSampleType is SampleTypeFloat){
             updateVal = true;
           }//end if
