@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 /// <summary>
 /// Goes on the edit menu of SampleType Menus for specifically floats.
 /// This makes the labels say the right information
+/// 
+/// This will break if you go back to using TMP, but shouldn't be super involved to fix.
 ///
 /// </summary>
 public class FloatEditMenu : MonoBehaviour
 {
-    public TextMeshPro maxLabel, minLabel, meanLabel, lastLabel, timeStampLabel, totalLabel;
+    public TextMeshPro TMPmaxLabel, TMPminLabel, TMPmeanLabel, TMPlastLabel, TMPtimeStampLabel, TMPtotalLabel;
+    public Text maxLabel, minLabel, meanLabel, lastLabel, timeStampLabel, totalLabel;
+    public bool usingTMP;
+
     public SampleTypeFloat associatedNode;//this is the right thing, and yet somehow we send representation menu option bad informaiton
 
     //each of the prefabs should have an abstract representation option
@@ -85,31 +91,62 @@ public class FloatEditMenu : MonoBehaviour
     public void UpdateMenu(){
         if(IsDefaultText(maxLabel.text) || float.Parse(maxLabel.text)!=associatedNode.maxVal){
             //update label
-            maxLabel.SetText(associatedNode.maxVal.ToString());
+            if(TMPmaxLabel!=null){
+                TMPmaxLabel.SetText(associatedNode.maxVal.ToString());
+            }
+            else{
+                maxLabel.text = (associatedNode.maxVal.ToString());
+            }
         }
         if(IsDefaultText(minLabel.text) || float.Parse(minLabel.text)!=associatedNode.minVal){
             //update label
-            minLabel.SetText(associatedNode.minVal.ToString());
+            if(TMPminLabel!=null){
+                TMPminLabel.SetText(associatedNode.minVal.ToString());
+            }
+            else{
+                minLabel.text = (associatedNode.minVal.ToString());
+            }
         }
         if(IsDefaultText(meanLabel.text) || float.Parse(meanLabel.text)!=associatedNode.meanVal){
             //update label
-            meanLabel.SetText(associatedNode.meanVal.ToString());
+            if(TMPmeanLabel!=null){
+                TMPmeanLabel.SetText(associatedNode.meanVal.ToString());
+            }
+            else{
+                meanLabel.text = (associatedNode.meanVal.ToString());
+            }        
         }
         if(IsDefaultText(lastLabel.text) || float.Parse(lastLabel.text)!=associatedNode.lastSampleValue){
             //update label
-            lastLabel.SetText(associatedNode.lastSampleValue.ToString());
+            if(TMPlastLabel!=null){
+                TMPlastLabel.SetText(associatedNode.lastSampleValue.ToString());
+            }
+            else{
+                lastLabel.text = (associatedNode.lastSampleValue.ToString());
+            }         
         }
         if(timeStampLabel.text!=associatedNode.lastTimeStamp.ToString()){
             //update label
-            timeStampLabel.SetText(associatedNode.lastTimeStamp.ToString());
+            if(TMPtimeStampLabel!=null){
+                TMPtimeStampLabel.SetText(associatedNode.lastTimeStamp.ToString());
+            }
+            else{
+                timeStampLabel.text = (associatedNode.lastTimeStamp.ToString());
+            }           
         }
         if(IsDefaultText(totalLabel.text) || float.Parse(totalLabel.text)!=associatedNode.numberOfSamples){
             //update label
-            totalLabel.SetText(associatedNode.numberOfSamples.ToString());
+            if(TMPtotalLabel!=null){
+                TMPtotalLabel.SetText(associatedNode.numberOfSamples.ToString());
+            }
+            else{
+                totalLabel.text = (associatedNode.numberOfSamples.ToString());
+            }       
         }
     }
 
     //for checking if the text is our default "there's no information here" string or a float
+    //this specifically will break if you go back to using TMP
     private bool IsDefaultText(string text){
         try
         {

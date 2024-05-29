@@ -205,6 +205,7 @@ public class MTConnectParser : MonoBehaviour
     List<GameObject> sampleTypeGOs = new List<GameObject>();
 
     foreach(XmlNode childNode in childNodes){
+      Debug.Log("Alright, we're dealing with a node. It's inner text is " + childNode.InnerText);//also always UNAVAILABLE
       SampleType thisSampleType;
       if(!sampleNames.Contains(childNode.Name)){//if we haven't seen this name before
         sampleNames.Add(childNode.Name);
@@ -301,10 +302,12 @@ public class MTConnectParser : MonoBehaviour
     //check if it's a float
     float value;
     if(float.TryParse(node.InnerText, out value)==true){
+      Debug.Log("This sample was a float. The text was " + node.InnerText);//runs sometimes!
       SampleTypeFloat newFloat = go.AddComponent<SampleTypeFloat>();
+      Debug.Log("Ok. We have added a sampletypefloat component to the new gameobject");
       return newFloat;
     }
-    Debug.Log("Confirmed, this sample was not a float");
+    Debug.Log("This sample was not a float. The text was " + node.InnerText);
     //if you were to treat other values as special, you would check for them here
     //if it isn't anything specific that we care about, return an abstract sample type
     SampleType newSampleType = go.AddComponent<SampleType>();
