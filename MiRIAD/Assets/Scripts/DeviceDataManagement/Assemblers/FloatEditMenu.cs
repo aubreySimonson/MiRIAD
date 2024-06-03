@@ -25,9 +25,14 @@ public class FloatEditMenu : MonoBehaviour
     public GameObject menuOptionPrefab;
     public GameObject repMenu;
     public GameObject representationCollector;
-    public float currentY = 0.5f;//where we put the last menu option
+    public float currentY = 0.8f;//where we put the last menu option
     public float yInterval = 0.1f;//amount to move every menu option down by
     // Start is called before the first frame update
+
+    public GameObject spotWhereRepresentationMenuOptionGoes;//something keeps moving these and you've gotten quite frustrated with it
+
+    //Debug stuff
+    public Text debugText;
     void Start()
     {        
         representationOptions = new List<AbstractRepresentation>();
@@ -41,30 +46,47 @@ public class FloatEditMenu : MonoBehaviour
             }
         }
         StartCoroutine(WaitForNodeInfo());
+        debugText = GameObject.Find("Debug").GetComponent<Text>();//so fucking fragile and inefficient. Find calls bad. 
+        debugText.text = "a float edit menu found the debugger";
     }
 
     IEnumerator WaitForNodeInfo()
     {
         yield return new WaitUntil(() => associatedNode != null);
         UpdateMenu();
-        CreateRepresentationsMenu();
+        //CreateRepresentationsMenu();
+        CreateRepresentationsMenuSimple();
+    }
+
+    public void CreateRepresentationsMenuSimple(){
+        foreach(GameObject rep in representationPrefabs){
+            rep.GetComponent<RepresentationMenuOptionFloat>().associatedNode = associatedNode;
+        }
     }
 
     public void CreateRepresentationsMenu(){
         foreach(GameObject rep in representationPrefabs){
             Debug.Log("Creating a menu option for a rep named: " + rep.name, this);
+            debugText.text = "Creating a menu option for a rep named: " + rep.name;//runs
             //create the menu option
-            GameObject menuOption = Instantiate(menuOptionPrefab);
+            GameObject menuOption = Instantiate(menuOptionPrefab);//runs
+            debugText.text = "Menu option placed at " + menuOption.transform.position;
 
             //the menu options tend to somehow get connected to the... wrong representation collector? 
             //you have no idea how this is happening
             menuOption.GetComponent<RepresentationMenuOptionFloat>().representationCollector = representationCollector;
             menuOption.GetComponent<RepresentationMenuOptionFloat>().associatedNode = associatedNode;
+            debugText.text = "rep collector and associated node have been set";
+
             //put it where it goes
             menuOption.transform.parent = repMenu.transform;
-            menuOption.transform.localPosition = new Vector3(0.03f, currentY, 0.0f);
-            menuOption.transform.localScale = new Vector3(3.0f, 2.5f, 0.1f);
+            menuOption.transform.localScale = new Vector3(500.0f, 500.0f, 500.0f);//when you make something a child of a UI, scale gets weird
+            // menuOption.transform.position = spotWhereRepresentationMenuOptionGoes.transform.position;
+            // spotWhereRepresentationMenuOptionGoes.GetComponent<Glue>().holdThis = menuOption;
+            // Debug.Log("The correct place for the menu option is " + menuOption.transform.position);
+            menuOption.transform.position = new Vector3(1.5f, currentY, 0.37f);
             menuOption.transform.rotation = repMenu.transform.rotation;
+            menuOption.GetComponent<PositionMonitor>().SetCorrectPosition();
             currentY-=yInterval;
 
             //change the label to the name

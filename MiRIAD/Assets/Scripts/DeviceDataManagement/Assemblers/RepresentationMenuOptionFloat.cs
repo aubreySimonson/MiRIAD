@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;//remove when you're done debugging
+using UnityEngine.UI;
 
 public class RepresentationMenuOptionFloat : MonoBehaviour
 {
@@ -9,6 +10,14 @@ public class RepresentationMenuOptionFloat : MonoBehaviour
     public GameObject representationPrefab;
     public SampleTypeFloat associatedNode;
     public bool testInstantiateRep = false;
+
+    //Debug stuff
+    public Text debugText;
+
+    private void Start(){
+        debugText = GameObject.Find("Debug").GetComponent<Text>();//so fucking fragile and inefficient. Find calls bad. 
+        //debugText.text = "a rep menu option found the debugger";//runs
+    }
 
     private void Update() {
         if(testInstantiateRep){
@@ -20,10 +29,12 @@ public class RepresentationMenuOptionFloat : MonoBehaviour
         //the following fix it, though the source is... a mystery
         if(representationCollector != gameObject.transform.GetComponentInParent<FloatEditMenu>().representationCollector){
             Debug.Log("Representation collector has somehow become something not given to this menu option by the menu. Fixing now.", this);//this happens
+            debugText.text = "Representation collector has somehow become something not given to this menu option by the menu. Fixing now.";
             representationCollector = gameObject.transform.GetComponentInParent<FloatEditMenu>().representationCollector;
         }
         if(associatedNode != gameObject.transform.GetComponentInParent<FloatEditMenu>().associatedNode){
             Debug.Log("Associated node has somehow become something not given to this menu option by the menu. Fixing now.", this);//this happens
+            debugText.text = "Associated node has somehow become something not given to this menu option by the menu. Fixing now.";
             associatedNode = gameObject.transform.GetComponentInParent<FloatEditMenu>().associatedNode;
         }
     }
