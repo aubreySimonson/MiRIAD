@@ -5016,6 +5016,7 @@ MonoBehaviour:
   menuCollider: {fileID: 537863736}
   menuItems: []
   itemsRemovedFromList: []
+  debugText: {fileID: 0}
 --- !u!114 &1120256393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10286,10 +10287,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 666105291366556801, guid: 1bc3ba05d329345f894f293274c537ed, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 695573984352589106, guid: 1bc3ba05d329345f894f293274c537ed, type: 3}
       propertyPath: m_Name
       value: COMPONENT PREFAB NEW
@@ -10321,10 +10318,6 @@ PrefabInstance:
     - target: {fileID: 2182147610721006539, guid: 1bc3ba05d329345f894f293274c537ed, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3679889909503531224, guid: 1bc3ba05d329345f894f293274c537ed, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4156743462625145358, guid: 1bc3ba05d329345f894f293274c537ed, type: 3}
       propertyPath: m_AnchorMax.y

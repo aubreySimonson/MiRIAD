@@ -352,7 +352,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2317,6 +2317,7 @@ MonoBehaviour:
   menuCollider: {fileID: 6841012674047006084}
   menuItems: []
   itemsRemovedFromList: []
+  debugText: {fileID: 0}
 --- !u!114 &9077344523085487658
 MonoBehaviour:
   m_ObjectHideFlags: 0
