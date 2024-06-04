@@ -2333,7 +2333,7 @@ MonoBehaviour:
   parent: {fileID: 695573984352589106}
   allSampleTypes: []
   sampleTypePrefab: {fileID: 8782304135012562511, guid: 7070b028961354b8a89baa5f0bb166f0, type: 3}
-  floatPrefab: {fileID: 8782304135012562511, guid: 7070b028961354b8a89baa5f0bb166f0, type: 3}
+  floatPrefab: {fileID: 750532807685739889, guid: b1d26407b496547de84ae1babeaad847, type: 3}
   generatorMenu: {fileID: 8521374098666177064}
   currentY: 65
   yInterval: 120

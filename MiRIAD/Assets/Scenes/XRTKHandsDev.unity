@@ -4808,7 +4808,7 @@ MonoBehaviour:
   m_CheckFor3DOcclusion: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
 --- !u!114 &1109639968
 MonoBehaviour:
@@ -4985,7 +4985,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120256384}
   m_LocalRotation: {x: 0.13052616, y: -0, z: -0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 0, z: 0.545}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3}
   m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9453,8 +9453,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1948693200}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5919670696019513014, guid: b1d26407b496547de84ae1babeaad847, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1d26407b496547de84ae1babeaad847, type: 3}
@@ -10287,6 +10286,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 666105291366556801, guid: 1bc3ba05d329345f894f293274c537ed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 695573984352589106, guid: 1bc3ba05d329345f894f293274c537ed, type: 3}
       propertyPath: m_Name
       value: COMPONENT PREFAB NEW
@@ -10318,6 +10321,10 @@ PrefabInstance:
     - target: {fileID: 2182147610721006539, guid: 1bc3ba05d329345f894f293274c537ed, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679889909503531224, guid: 1bc3ba05d329345f894f293274c537ed, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4156743462625145358, guid: 1bc3ba05d329345f894f293274c537ed, type: 3}
       propertyPath: m_AnchorMax.y
