@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 ///<summary>
 ///Part of Untitled Digital Twin Authoring Tool
@@ -14,6 +16,7 @@ public class GeneratorMenu : MonoBehaviour
     public List<GameObject> menuItems;
 
     public List<GameObject> itemsRemovedFromList;
+    public Text debugText;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,7 @@ public class GeneratorMenu : MonoBehaviour
         menuCollider = gameObject.GetComponent<Collider>();
       }
       collectorObject.SetActive(true);//prevents menu items from disapearing when selected if we accidentally turned this off
+      debugText = GameObject.Find("Debug").GetComponent<Text>();//so fucking fragile and inefficient. Find calls bad. 
     }
 
     void OnTriggerExit(Collider other){

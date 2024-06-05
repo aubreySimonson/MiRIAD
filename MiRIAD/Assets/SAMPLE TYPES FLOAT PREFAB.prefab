@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 8235112998295248426}
   - component: {fileID: 7013424516759611329}
   - component: {fileID: 6510621083450806352}
+  - component: {fileID: 5392707360720506990}
   m_Layer: 0
   m_Name: SAMPLE TYPES FLOAT PREFAB
   m_TagString: Untagged
@@ -584,6 +585,20 @@ MonoBehaviour:
   currentY: 0.5
   yInterval: 0.1
   spotWhereRepresentationMenuOptionGoes: {fileID: 0}
+  debugText: {fileID: 0}
+--- !u!114 &5392707360720506990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750532807685739889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326ada309919b49f483b1078201fad1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tolerance: 0.01
   debugText: {fileID: 0}
 --- !u!1 &1038889678357177274
 GameObject:
