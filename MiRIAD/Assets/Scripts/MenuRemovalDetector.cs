@@ -17,7 +17,7 @@ public class MenuRemovalDetector : MonoBehaviour
     public float tolerance;//how far should the thing have to move before we call it "removed from the menu"?
     private bool removed = false;
     public Text debugText;
-    public GameObject collector;
+    public MenuManager menuManager;
     public GeneratorMenu generatorMenu;//for while we're still using both-- you should really clean this up eventually
 
     void Start(){
@@ -55,6 +55,6 @@ public class MenuRemovalDetector : MonoBehaviour
         debugText.text = "removing item from menu";
         removed = true;
         //gameObject.transform.parent = collector.transform;//might not work because we're holding it
-        generatorMenu.itemsRemovedFromList.Add(gameObject);
+        menuManager.itemsRemovedFromList.Add(gameObject);
     }
 }
