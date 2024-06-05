@@ -35,6 +35,7 @@ public class FloatEditMenu : MonoBehaviour
     public Text debugText;
     void Start()
     {        
+        StartCoroutine(WaitForNodeInfo());
         representationOptions = new List<AbstractRepresentation>();
         //check that all representation prefabs have an abstract representation-- otherwise throw them away
         foreach(GameObject repPrefab in representationPrefabs){
@@ -45,7 +46,6 @@ public class FloatEditMenu : MonoBehaviour
                 representationOptions.Add(repPrefab.GetComponent<AbstractRepresentation>());
             }
         }
-        StartCoroutine(WaitForNodeInfo());
         debugText = GameObject.Find("Debug").GetComponent<Text>();//so fucking fragile and inefficient. Find calls bad. 
         debugText.text = "a float edit menu found the debugger";
     }
@@ -60,7 +60,7 @@ public class FloatEditMenu : MonoBehaviour
 
     public void CreateRepresentationsMenuSimple(){
         foreach(GameObject rep in representationPrefabs){
-            rep.GetComponent<RepresentationMenuOptionFloat>().associatedNode = associatedNode;
+            rep.GetComponent<RepresentationMenuOptionFloat>().associatedNode = associatedNode;//errors
         }
     }
 

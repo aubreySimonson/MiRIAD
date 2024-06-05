@@ -18,7 +18,7 @@ public class ThermometerRepresentation : FloatRepresentation
         originalYOffset = rend.material.mainTextureOffset.y;//returns a Vector2, and we don't care about the x axis
         SetUnderlyingNode(associatedNode);
         SetDisplayValue(associatedNode.lastSampleValue);
-        gameObject.transform.localScale = new Vector3(0.015f, 0.2f, 0.05f);
+        gameObject.transform.localScale = new Vector3(0.015f, 0.15f, 0.015f);
     }
     public void SetDisplayValue(string newValue){
         MoveMercury(float.Parse(newValue));

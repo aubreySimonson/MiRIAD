@@ -20,7 +20,8 @@ public class SampleTypesMenu : MonoBehaviour
     public GameObject parent;
     public List<AbstractNode> allSampleTypes;//only the ones which are children of parent component
     public GameObject sampleTypePrefab, floatPrefab;
-    public GeneratorMenu generatorMenu;
+    //public GeneratorMenu generatorMenu;
+    public MenuManager menuManager;
 
 
     //positioning stuff
@@ -30,9 +31,6 @@ public class SampleTypesMenu : MonoBehaviour
     void Start()
     {
         StartCoroutine(WaitForParentInfo());
-        if(generatorMenu == null){
-            generatorMenu = gameObject.GetComponent<GeneratorMenu>();
-        }
     }
 
     public void AssembleSamples(){
@@ -51,7 +49,8 @@ public class SampleTypesMenu : MonoBehaviour
           newSampleType = Instantiate(sampleTypePrefab);
           Debug.Log("Sample Type was not a float");
         }
-        generatorMenu.menuItems.Add(newSampleType);
+        //generatorMenu.menuItems.Add(newSampleType);
+        menuManager.menuItems.Add(newSampleType);
         //...and then you need to do some magic to make them stack correctly, and get the name right...
         newSampleType.transform.parent = gameObject.transform;
         newSampleType.transform.rotation = newSampleType.transform.parent.rotation;
@@ -61,6 +60,9 @@ public class SampleTypesMenu : MonoBehaviour
         currentY-=yInterval;
         //change the label to the name-- there must be better ways of doing this...
         SetSampleTypeName(newSampleType, sampleType.sampleTypeName);
+        //newSampleType.GetComponent<MenuRemovalDetector>().collector = generatorMenu.collectorObject;//change this if we stop using generator menus
+        //newSampleType.GetComponent<MenuRemovalDetector>().generatorMenu = generatorMenu;
+        newSampleType.GetComponent<MenuRemovalDetector>().menuManager = menuManager;
       }
     }
 
