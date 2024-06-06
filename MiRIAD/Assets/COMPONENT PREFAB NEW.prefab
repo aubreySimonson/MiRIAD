@@ -2188,8 +2188,8 @@ GameObject:
   - component: {fileID: 1677622401318449781}
   - component: {fileID: 3166175104898659219}
   - component: {fileID: 5715535620500536216}
-  - component: {fileID: 8521374098666177064}
   - component: {fileID: 9077344523085487658}
+  - component: {fileID: 2340170033968377080}
   m_Layer: 0
   m_Name: Samples Menu
   m_TagString: Untagged
@@ -2301,23 +2301,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
---- !u!114 &8521374098666177064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8962298454510206648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0ef0cf30d85a4386a1f8b779a365be6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectorObject: {fileID: 2721655090539435971}
-  menuCollider: {fileID: 6841012674047006084}
-  menuItems: []
-  itemsRemovedFromList: []
-  debugText: {fileID: 0}
 --- !u!114 &9077344523085487658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2335,9 +2318,24 @@ MonoBehaviour:
   allSampleTypes: []
   sampleTypePrefab: {fileID: 8782304135012562511, guid: 7070b028961354b8a89baa5f0bb166f0, type: 3}
   floatPrefab: {fileID: 750532807685739889, guid: b1d26407b496547de84ae1babeaad847, type: 3}
-  generatorMenu: {fileID: 8521374098666177064}
+  menuManager: {fileID: 2340170033968377080}
   currentY: 65
   yInterval: 120
+--- !u!114 &2340170033968377080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8962298454510206648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863b8afac16ea4b089dec6e224dc2703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsRemovedFromList: []
+  collectorObject: {fileID: 2721655090539435971}
+  menuItems: []
 --- !u!1001 &322955137143931086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2951,7 +2949,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thingToToggle: {fileID: 8962298454510206648}
-  generatorMenu: {fileID: 8521374098666177064}
+  generatorMenu: {fileID: 0}
+  menuManager: {fileID: 2340170033968377080}
 --- !u!114 &8118054303796109175
 MonoBehaviour:
   m_ObjectHideFlags: 0

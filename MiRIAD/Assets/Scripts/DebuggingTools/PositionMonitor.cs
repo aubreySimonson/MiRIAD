@@ -35,7 +35,7 @@ public class PositionMonitor : MonoBehaviour
 
     IEnumerator UnlockAfterDelay()
     {
-        yield return new WaitForSeconds(0.2f);//10 frames
+        yield return new WaitForSeconds(0.2f);//10 frames//should be 0.2 but we're fucking around
         lockPosition = false;
     }
 }
