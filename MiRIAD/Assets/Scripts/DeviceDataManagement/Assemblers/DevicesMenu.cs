@@ -34,7 +34,7 @@ public class DevicesMenu : MonoBehaviour
     void Start()
     {
       StartCoroutine(WaitForRootNode());
-      currentY = 1.12f;
+      currentY = 1.4f;
       //AssembleDevices();
       if(parser == null){
         parser = GameObject.FindObjectOfType<MTConnectParser>();
