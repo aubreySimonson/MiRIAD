@@ -96,7 +96,7 @@ public class ComponentsMenu : MonoBehaviour
     {
         //yield on a new YieldInstruction that waits for 5 seconds.
         yield return new WaitForSeconds(0.1f);
-        Debug.Log("component is at " + putThisBack.transform.position + ". Putting it back at the correct location, which is " + correctPosition);
+        //Debug.Log("component is at " + putThisBack.transform.position + ". Putting it back at the correct location, which is " + correctPosition);
         putThisBack.transform.localPosition = correctPosition;
         putThisBack.transform.rotation = putThisBack.transform.parent.rotation;
     }

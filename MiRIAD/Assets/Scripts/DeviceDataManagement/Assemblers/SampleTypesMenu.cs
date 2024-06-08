@@ -54,7 +54,7 @@ public class SampleTypesMenu : MonoBehaviour
         //...and then you need to do some magic to make them stack correctly, and get the name right...
         newSampleType.transform.parent = gameObject.transform;
         newSampleType.transform.rotation = newSampleType.transform.parent.rotation;
-        newSampleType.transform.localPosition = new Vector3(-150.0f, currentY, 0.0f);
+        newSampleType.transform.localPosition = new Vector3(-50.0f, currentY, 0.0f);
         newSampleType.GetComponent<PositionMonitor>().SetCorrectPosition();
         //newSampleType.transform.transform.LookAt(Vector3.zero);
         currentY-=yInterval;
@@ -79,7 +79,7 @@ public class SampleTypesMenu : MonoBehaviour
     public void FindSamples(AbstractNode thisNode){
       Debug.Log("Find samples is being given this thing" + thisNode, this);//runs, and it is being given an abstract node
       //this assumes that no sample types will be childen of other sample types
-      if(thisNode.gameObject.GetComponent<SampleType>() != null){//this, of all things, somehow gives us a null exception
+      if(thisNode.gameObject.GetComponent<SampleType>() != null){
         allSampleTypes.Add(thisNode);
       }
       else{
