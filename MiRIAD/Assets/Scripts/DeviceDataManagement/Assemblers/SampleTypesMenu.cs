@@ -34,27 +34,22 @@ public class SampleTypesMenu : MonoBehaviour
     }
 
     public void AssembleSamples(){
-      Debug.Log("Finding samples on ", this);//runs
-      FindSamples(parentNode);//this is the correct node
+      FindSamples(parentNode);
       foreach(SampleType sampleType in allSampleTypes){
         GameObject newSampleType;
-        //seems like it might be the case that neither the if nor else statement run?
-        Debug.Log("We're in that foreach loop.");
         if(sampleType is SampleTypeFloat){
-          Debug.Log("Sample Type was a float");
           newSampleType = Instantiate(floatPrefab);
-          newSampleType.GetComponent<FloatEditMenu>().associatedNode = (SampleTypeFloat)sampleType;//somewhat fragile//has come back to bite you in the ass
+          newSampleType.GetComponent<FloatEditMenu>().associatedNode = (SampleTypeFloat)sampleType;//somewhat fragile
         }
         else{
           newSampleType = Instantiate(sampleTypePrefab);
-          Debug.Log("Sample Type was not a float");
         }
         //generatorMenu.menuItems.Add(newSampleType);
         menuManager.menuItems.Add(newSampleType);
         //...and then you need to do some magic to make them stack correctly, and get the name right...
         newSampleType.transform.parent = gameObject.transform;
         newSampleType.transform.rotation = newSampleType.transform.parent.rotation;
-        newSampleType.transform.localPosition = new Vector3(-50.0f, currentY, 0.0f);
+        newSampleType.transform.localPosition = new Vector3(-122.0f, currentY, 0.0f);
         newSampleType.GetComponent<PositionMonitor>().SetCorrectPosition();
         //newSampleType.transform.transform.LookAt(Vector3.zero);
         currentY-=yInterval;
@@ -77,7 +72,6 @@ public class SampleTypesMenu : MonoBehaviour
 
     //how this works is /very/ different from how it was for components...
     public void FindSamples(AbstractNode thisNode){
-      Debug.Log("Find samples is being given this thing" + thisNode, this);//runs, and it is being given an abstract node
       //this assumes that no sample types will be childen of other sample types
       if(thisNode.gameObject.GetComponent<SampleType>() != null){
         allSampleTypes.Add(thisNode);
@@ -86,7 +80,6 @@ public class SampleTypesMenu : MonoBehaviour
         if(thisNode.childNodes.Count!=0){
           foreach(AbstractNode childNode in thisNode.childNodes){//not relying on the scene hierarchy
             if(childNode!=null){
-              Debug.Log("Calling FindSamples on " + childNode);
               FindSamples(childNode);
             }
           }//end foreach

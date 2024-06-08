@@ -50,7 +50,7 @@ public class ComponentsMenu : MonoBehaviour
         newComponent.GetComponentInChildren<SampleTypesMenu>(true).parentNode = component;//true = include inactive
         //...and then you need to do some magic to make them stack correctly, and get the name right...
         newComponent.transform.parent = gameObject.transform;
-        Vector3 correctLocation = new Vector3(-162f, currentY, -18f);
+        Vector3 correctLocation = new Vector3(-122f, currentY, -18f);
         newComponent.transform.localPosition = correctLocation;
         StartCoroutine(PutBackWhereItGoes(newComponent, correctLocation));
         //newComponent.transform.LookAt(Vector3.zero);
