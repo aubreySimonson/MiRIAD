@@ -15,6 +15,7 @@ public class AbstractRepresentation : MonoBehaviour
 {
     public string name;//what name should we display in the menu?
     //representations should generally be able to set themselves up from just this information
+    public NodeManager nodeManager;
     public void Initialize(SampleType associatedNode){
 
     }   

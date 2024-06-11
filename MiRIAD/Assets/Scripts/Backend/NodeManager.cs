@@ -27,6 +27,8 @@ public class NodeManager : MonoBehaviour
 
     private int nodesChecked;//for making sure that we actually check all of the nodes when we do things recursively
 
+    public List<AbstractRepresentation> representations;
+
     //start initialization of everything
     public void BuildTree(){
         mTConnectParser.ReadSampleData();

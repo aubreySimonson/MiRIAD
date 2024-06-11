@@ -140,7 +140,7 @@ public class MTConnectParser : MonoBehaviour
       nodeManager.rootNode = thisNodeUnity;
     }
     thisNodeUnity.nodeName = node.Name;
-    thisNodeUnity.nodeID = node.Attributes["dataItemId"]?.Value;//set the thing to the thing if it isn't null
+    thisNodeUnity.nodeID = GetID(node);
     return thisNodeUnity;
   }
 
@@ -157,6 +157,7 @@ public class MTConnectParser : MonoBehaviour
     }//end else
   }
 
+//creates one sample type game object per node name
   private void HandleDuplicateSamples(XmlNodeList childNodes, AbstractNode thisNodeUnity){
     List<string> nodeNames = new List<string>();
     foreach(XmlNode childNode in childNodes){
@@ -185,17 +186,15 @@ public class MTConnectParser : MonoBehaviour
     else if (node.Name == "Samples"){
       thisNodeUnity = thisNodeGo.AddComponent<SamplesHolder>();//inherits from abstact node
       SamplesAggregator(node, thisNodeUnity, thisNodeGo);
+      thisNodeUnity.nodeID = GetID(node);
     }
     else{
       thisNodeUnity = thisNodeGo.AddComponent<AbstractNode>();
+      thisNodeUnity.nodeID = GetID(node);
     }
     return thisNodeUnity;
   }
 
-  private string GetId(XmlNode node){
-    List<string> idAttributes = new List<string> { "id", "dataItemId", "name", "uuid", "componentId", "path" };
-    return "not implemented yet";
-  }
 
   #endregion
 
@@ -310,6 +309,17 @@ public class MTConnectParser : MonoBehaviour
     //if it isn't anything specific that we care about, return an abstract sample type
     SampleType newSampleType = go.AddComponent<SampleType>();
     return newSampleType;
+  }
+
+  private string GetID(XmlNode node){
+    List<string> idAttributes = new List<string> { "id", "dataItemId", "name", "uuid", "componentId", "path" };
+    foreach (string attrName in idAttributes)
+    {
+      if(node.Attributes[attrName]!=null){
+        return node.Attributes[attrName].Value;
+      }
+    }
+    return "could not find id";
   }
 
   //consider cutting this. We don't use it right now.

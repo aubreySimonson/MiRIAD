@@ -28,6 +28,8 @@ public class ScalingFloat : FloatRepresentation
         SetDisplayValue(associatedNode.lastSampleValue);
         PrecompileVectors();//we shouldn't have to do this again when things update-- just the once
         SetScale(associatedNode.lastSampleValue);
+        nodeManager = GameObject.Find("NodeManager").GetComponent<NodeManager>();//a bit fragile
+        nodeManager.representations.Add(this);
     }
     public void SetDisplayValue(string newValue){
         display.text = newValue;

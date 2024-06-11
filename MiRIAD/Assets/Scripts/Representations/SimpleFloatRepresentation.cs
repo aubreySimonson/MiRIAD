@@ -20,6 +20,8 @@ public class SimpleFloatRepresentation : FloatRepresentation
         display.text = "underlying node set";
         SetDisplayValue(associatedNode.lastSampleValue);
         gameObject.transform.localScale = new Vector3(0.022f, 0.022f, 0.022f);
+        nodeManager = GameObject.Find("NodeManager").GetComponent<NodeManager>();//a bit fragile
+        nodeManager.representations.Add(this);
     }
     public void SetDisplayValue(string newValue){
         display.text = newValue;

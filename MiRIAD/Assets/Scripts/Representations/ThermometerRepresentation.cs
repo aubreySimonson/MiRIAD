@@ -19,7 +19,10 @@ public class ThermometerRepresentation : FloatRepresentation
         SetUnderlyingNode(associatedNode);
         SetDisplayValue(associatedNode.lastSampleValue);
         gameObject.transform.localScale = new Vector3(0.015f, 0.15f, 0.015f);
+        nodeManager = GameObject.Find("NodeManager").GetComponent<NodeManager>();//a bit fragile
+        nodeManager.representations.Add(this);
     }
+
     public void SetDisplayValue(string newValue){
         MoveMercury(float.Parse(newValue));
     }
