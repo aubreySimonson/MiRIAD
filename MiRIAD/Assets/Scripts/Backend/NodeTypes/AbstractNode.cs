@@ -29,4 +29,5 @@ public class AbstractNode : MonoBehaviour
   //public AbstractValue value;--actually, it seems like very few nodes actually have values
   //do you also add a dictionary of other values?
   public GameObject physicalRepresentation;
+
 }

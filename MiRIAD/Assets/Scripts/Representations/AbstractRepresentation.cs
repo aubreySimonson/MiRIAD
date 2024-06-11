@@ -14,9 +14,12 @@ using UnityEngine;
 public class AbstractRepresentation : MonoBehaviour
 {
     public string name;//what name should we display in the menu?
+    public string id;
     //representations should generally be able to set themselves up from just this information
     public NodeManager nodeManager;
+    public AbstractNode associatedNode;
     public void Initialize(SampleType associatedNode){
 
     }   
+
 }

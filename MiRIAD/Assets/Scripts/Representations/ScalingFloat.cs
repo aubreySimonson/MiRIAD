@@ -30,6 +30,7 @@ public class ScalingFloat : FloatRepresentation
         SetScale(associatedNode.lastSampleValue);
         nodeManager = GameObject.Find("NodeManager").GetComponent<NodeManager>();//a bit fragile
         nodeManager.representations.Add(this);
+        nodeManager.DebugReps();
     }
     public void SetDisplayValue(string newValue){
         display.text = newValue;

@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.XPath;
+using UnityEngine.UI;
 
 ///<summary>
 ///Part of MiRIAD, an authoring tool for digital twins
@@ -23,11 +24,18 @@ public class NodeManager : MonoBehaviour
     public ServerTalker serverTalker;
     public AbstractNode rootNode;
     private bool isRecording = false;
+    public Text debugText;
      
 
     private int nodesChecked;//for making sure that we actually check all of the nodes when we do things recursively
 
     public List<AbstractRepresentation> representations;
+
+    public void DebugReps(){
+        debugText.text = representations[0].name;
+    }
+
+
 
     //start initialization of everything
     public void BuildTree(){

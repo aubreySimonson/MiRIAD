@@ -13,7 +13,7 @@ using UnityEngine;
 public class SampleType : AbstractNode
 {
     public string sampleTypeName;
-    public string dataItemId;
+    public string dataItemId;//literally always null
 
     //saving refs to time stamps and values here, rather than asking lastSample  for them
     //is only a choice you're making for efficiency reasons.
