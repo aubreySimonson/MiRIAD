@@ -532,6 +532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 160214833}
   - component: {fileID: 160214832}
+  - component: {fileID: 160214834}
   m_Layer: 0
   m_Name: NodeManager
   m_TagString: Untagged
@@ -555,6 +556,7 @@ MonoBehaviour:
   serverTalker: {fileID: 432100175}
   rootNode: {fileID: 0}
   debugText: {fileID: 442043987}
+  xML_Sandbox: {fileID: 160214834}
   representations: []
 --- !u!4 &160214833
 Transform:
@@ -571,6 +573,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &160214834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160214831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e3e7e870ea64678a93072acd59af39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &170632160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1984,6 +1998,7 @@ MonoBehaviour:
   serverTalker: {fileID: 432100175}
   rootNode: {fileID: 0}
   debugText: {fileID: 0}
+  xML_Sandbox: {fileID: 0}
   representations: []
 --- !u!1 &442043986
 GameObject:
@@ -4961,7 +4976,6 @@ MonoBehaviour:
   allDevices: []
   devicePrefab: {fileID: 5196198408802561581, guid: 185e315d799d943bf9de1915af1f4aa2, type: 3}
   putDevicesHere: {fileID: 0}
-  generatorMenu: {fileID: 0}
   yInterval: 0.05
 --- !u!1 &1129778165
 GameObject:

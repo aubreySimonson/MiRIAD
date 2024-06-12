@@ -234,6 +234,9 @@ public class MTConnectParser : MonoBehaviour
       //time stamp things-- updates timestamp if more recent
       bool updateVal = CheckForMoreRecentTimeStamp(childNode, thisSampleType);
 
+      //get the id for this sample type
+      thisSampleType.nodeID = GetID(childNode);
+
 
       //special things we only do for floats
       if(thisSampleType is SampleTypeFloat){

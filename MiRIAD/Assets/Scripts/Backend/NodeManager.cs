@@ -25,6 +25,8 @@ public class NodeManager : MonoBehaviour
     public AbstractNode rootNode;
     private bool isRecording = false;
     public Text debugText;
+
+    public XML_Sandbox xML_Sandbox;
      
 
     private int nodesChecked;//for making sure that we actually check all of the nodes when we do things recursively
@@ -33,7 +35,8 @@ public class NodeManager : MonoBehaviour
 
     public void DebugReps(){
         debugText.text = representations[0].name;
-        debugText.text = representations[0].GetIdInNodeParent();
+        debugText.text = "node id is : " + representations[0].GetIdInNodeParent();
+        debugText.text += ". Node value is " + xML_Sandbox.GetNodeInnerText(representations[0].GetIdInNodeParent());//might not work for *thing in wrong generation* reasons
     }
 
 
