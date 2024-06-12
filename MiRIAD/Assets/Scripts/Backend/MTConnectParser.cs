@@ -96,10 +96,10 @@ public class MTConnectParser : MonoBehaviour
 
 #endregion
   
-  # region create non-sample-type nodes
+# region create non-sample-type nodes
   private AbstractNode CreateNodeGameObject(XmlNode node, bool doRecursion){
     if(node == null|| node.Name == "#text") return null;
-    totalNodes++;//for debugging, cut later
+    totalNodes++;
     AbstractNode thisNodeUnity = CreateNodeHelper(node);
     if(doRecursion && node.Name!="Samples"){//don't do recursion on sets of samples
       NodeRecursion(node, thisNodeUnity);
@@ -111,9 +111,9 @@ public class MTConnectParser : MonoBehaviour
     if (parentNode == null || node == null || node.Name == "#text") return null;
 
     if(node.Name!="#text"){//trims white space
-      totalNodes++;//for debugging, cut later
+      totalNodes++;
       AbstractNode thisNodeUnity = CreateNodeHelper(node);
-      if(thisNodeUnity == null){//the xml node we found should not get a unity node
+      if(thisNodeUnity == null){
         return null;
       }
       thisNodeUnity.parentNode = parentNode;
@@ -126,8 +126,6 @@ public class MTConnectParser : MonoBehaviour
     return null;
   }
 
-  //there are a bunch of things we do across the different overloads of createnodegameobject in exactly the same way
-  //these are all of our helper functions for making out code dryer.
   private AbstractNode CreateNodeHelper(XmlNode node){
     GameObject thisNodeGo = Instantiate(nodePrefab);//instantiate an empty game object
     AbstractNode thisNodeUnity = AddCorrectNodeType(node, thisNodeGo);
@@ -210,7 +208,6 @@ public class MTConnectParser : MonoBehaviour
     List<GameObject> sampleTypeGOs = new List<GameObject>();
 
     foreach(XmlNode childNode in childNodes){
-      Debug.Log("Alright, we're dealing with a node. It's inner text is " + childNode.InnerText);//also always UNAVAILABLE
       SampleType thisSampleType;
       if(!sampleNames.Contains(childNode.Name)){//if we haven't seen this name before
         sampleNames.Add(childNode.Name);
@@ -234,22 +231,8 @@ public class MTConnectParser : MonoBehaviour
       thisSampleType.numberOfSamples++;
 
 
-      //time stamp things
-      bool updateVal = false;//flag for a few lines later
-      try{
-        System.DateTime timeStamp = System.DateTime.Parse(childNode.Attributes["timestamp"].Value);
-        if(thisSampleType.lastTimeStamp == null || timeStamp>thisSampleType.lastTimeStamp){
-          //Debug.Log("timestamp: " + timeStamp);
-          thisSampleType.lastTimeStamp = timeStamp;
-          //sample.timeStamp = timeStamp;
-          if(thisSampleType is SampleTypeFloat){
-            updateVal = true;
-          }//end if
-        }//end if
-      }//end try
-      catch{
-        Debug.Log("no correctly formatted timestamp for this sample");
-      }
+      //time stamp things-- updates timestamp if more recent
+      bool updateVal = CheckForMoreRecentTimeStamp(childNode, thisSampleType);
 
 
       //special things we only do for floats
@@ -278,6 +261,24 @@ public class MTConnectParser : MonoBehaviour
     }//end foreach
     holderNodeUnity.childNodes = samplesButAbstract;
   }//end samples aggregator
+
+  ///returns true if there's a more recent timestamp
+  ///also updates the lasttimestamp of the sampletype
+  private bool CheckForMoreRecentTimeStamp(XmlNode node, SampleType sampleType){
+    bool updateVal = false;//flag for a few lines later
+    try{
+      System.DateTime timeStamp = System.DateTime.Parse(node.Attributes["timestamp"].Value);
+      if(sampleType.lastTimeStamp == null || timeStamp>sampleType.lastTimeStamp){
+        //Debug.Log("timestamp: " + timeStamp);
+        sampleType.lastTimeStamp = timeStamp;
+        return true;
+      }//end if
+    }//end try
+    catch{
+      Debug.Log("no correctly formatted timestamp for this sample");
+    }
+    return false;
+  }
 
 
   //this is an inefficient, really brute force method and someone else should fix it later.

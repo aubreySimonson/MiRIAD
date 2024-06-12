@@ -33,6 +33,7 @@ public class NodeManager : MonoBehaviour
 
     public void DebugReps(){
         debugText.text = representations[0].name;
+        debugText.text = representations[0].GetIdInNodeParent();
     }
 
 

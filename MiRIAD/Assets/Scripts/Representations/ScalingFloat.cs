@@ -15,6 +15,8 @@ public class ScalingFloat : FloatRepresentation
     //Spaghetti, but might be useful when all of the parts do actually have to talk to eachother
     public SampleTypeFloat underlyingNode;
 
+
+
     void Start(){
         originalLocalScale = gameObject.transform.localScale;
     }
@@ -41,7 +43,8 @@ public class ScalingFloat : FloatRepresentation
     }
 
     public void SetUnderlyingNode(SampleTypeFloat node){
-        underlyingNode = node;
+        underlyingNode = node;//this one is a sampletypefloat
+        associatedNode = node;//samething, but its an abstract node
     }
 
     public void SetScale(float newValue){
