@@ -557,6 +557,7 @@ MonoBehaviour:
   rootNode: {fileID: 0}
   debugText: {fileID: 442043987}
   xML_Sandbox: {fileID: 160214834}
+  refreshRate: 0
   representations: []
 --- !u!4 &160214833
 Transform:
@@ -1999,6 +2000,7 @@ MonoBehaviour:
   rootNode: {fileID: 0}
   debugText: {fileID: 0}
   xML_Sandbox: {fileID: 0}
+  refreshRate: 0
   representations: []
 --- !u!1 &442043986
 GameObject:
@@ -2040,10 +2042,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -2077,7 +2079,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -376.00003, y: -79}
-  m_SizeDelta: {x: 160, y: 200}
+  m_SizeDelta: {x: 160, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &448506027 stripped
 RectTransform:

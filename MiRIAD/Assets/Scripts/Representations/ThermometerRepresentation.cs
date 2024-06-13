@@ -12,7 +12,6 @@ public class ThermometerRepresentation : FloatRepresentation
     public Transform bottom, top;//defines the range of where the mean line can go
 
     //menus should call this after instantiating the relevant prefab. 
-    //this is absolutely feral data architecture and should be refactored later
     public override void Initialize(SampleTypeFloat associatedNode){
         rend = gameObject.GetComponent<Renderer>();
         originalYOffset = rend.material.mainTextureOffset.y;//returns a Vector2, and we don't care about the x axis
@@ -22,9 +21,17 @@ public class ThermometerRepresentation : FloatRepresentation
         nodeManager = GameObject.Find("NodeManager").GetComponent<NodeManager>();//a bit fragile
         nodeManager.representations.Add(this);
     }
+    public override void RefreshDisplay(float newValue){
+        SetDisplayValue(newValue);
+    }
+
+    public override void RefreshDisplay(string newValue){
+        SetDisplayValue(float.Parse(newValue));
+    }
 
     public void SetDisplayValue(string newValue){
         MoveMercury(float.Parse(newValue));
+        SetMeanLine();
     }
 
     public void SetDisplayValue(float newValue){

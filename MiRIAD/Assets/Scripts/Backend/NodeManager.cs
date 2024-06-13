@@ -27,6 +27,7 @@ public class NodeManager : MonoBehaviour
     public Text debugText;
 
     public XML_Sandbox xML_Sandbox;
+    public float refreshRate;//in seconds
      
 
     private int nodesChecked;//for making sure that we actually check all of the nodes when we do things recursively
@@ -34,11 +35,31 @@ public class NodeManager : MonoBehaviour
     public List<AbstractRepresentation> representations;
 
     public void DebugReps(){
-        debugText.text = representations[0].name;
-        debugText.text = "node id is : " + representations[0].GetIdInNodeParent();
-        debugText.text += ". Node value is " + xML_Sandbox.GetNodeInnerText(representations[0].GetIdInNodeParent());//might not work for *thing in wrong generation* reasons
+        //debugText.text = representations[0].name;
+        //debugText.text = "node id is : " + representations[0].GetIdInNodeParent();
+        //debugText.text += ". Node value is " + xML_Sandbox.GetNodeInnerText(representations[0].GetIdInNodeParent());//might not work for *thing in wrong generation* reasons
+        InvokeRepeating("RefreshDisplays", 1.0f, 4.0f);
     }
 
+    //go and check data only for nodes being used in displays
+    //harder to write, but much more efficient if this ever scales
+    public void RefreshDisplays(){
+        //get data from remote-- the syncing on these is definitely going to be kind of weird
+         StartCoroutine(xML_Sandbox.GetWebData("https://demo.metalogi.io/current"));
+        //iterate over XML and find everything in the displayed IDs list
+        foreach(AbstractRepresentation rep in representations){
+            debugText.text += xML_Sandbox.GetNodeInnerText(rep.GetIdInNodeParent());
+            
+            //the following is not the most elegant thing you've ever written
+            if(rep is FloatRepresentation){
+                FloatRepresentation repButAFloat = (FloatRepresentation) rep;
+                repButAFloat.RefreshDisplay(xML_Sandbox.GetNodeInnerText(rep.GetIdInNodeParent()));
+            }
+        }
+    }
+
+
+    /// functions below this lines are sort of in the ideas phase, and aren't really doing anything yet 
 
 
     //start initialization of everything
@@ -59,16 +80,6 @@ public class NodeManager : MonoBehaviour
 
     }
 
-    //go and check data only for nodes being used in displays
-    //harder to write, but much more efficient if this ever scales
-    public void RefreshDisplays(){
-        //get data from remote
-        //iterate over XML and find everything in the displayed IDs list
-    }
-
-    private string GetSpecificDisplayData(AbstractNode specificNode){
-        return "not implemented yet-- should return a sample or null";
-    }
     
     //go and check remote for new data for all nodes
     public void RefreshAll(){

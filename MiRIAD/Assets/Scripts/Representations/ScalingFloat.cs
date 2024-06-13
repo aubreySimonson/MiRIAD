@@ -12,7 +12,7 @@ public class ScalingFloat : FloatRepresentation
     public float minScale;//how much should we scale the thing by if the thing is at its min value?
     private Vector3 minScaleVector;//same for this
 
-    //Spaghetti, but might be useful when all of the parts do actually have to talk to eachother
+    //different from associated node, which is the same thing, but stored as an abstract node
     public SampleTypeFloat underlyingNode;
 
 
@@ -22,17 +22,22 @@ public class ScalingFloat : FloatRepresentation
     }
 
     //menus should call this after instantiating the relevant prefab. 
-    //this is absolutely feral data architecture and should be refactored later
     public override void Initialize(SampleTypeFloat associatedNode){
-        display.text = "initialize was called";
         SetUnderlyingNode(associatedNode);
-        display.text = "underlying node set";
         SetDisplayValue(associatedNode.lastSampleValue);
         PrecompileVectors();//we shouldn't have to do this again when things update-- just the once
         SetScale(associatedNode.lastSampleValue);
         nodeManager = GameObject.Find("NodeManager").GetComponent<NodeManager>();//a bit fragile
         nodeManager.representations.Add(this);
-        nodeManager.DebugReps();
+        nodeManager.DebugReps();//debugging
+    }
+    public override void RefreshDisplay(float newValue){
+        SetDisplayValue(newValue);
+        SetScale(newValue);
+    }
+    public override void RefreshDisplay(string newValue){
+        SetDisplayValue(float.Parse(newValue));
+        SetScale(float.Parse(newValue));
     }
     public void SetDisplayValue(string newValue){
         display.text = newValue;
@@ -48,7 +53,6 @@ public class ScalingFloat : FloatRepresentation
     }
 
     public void SetScale(float newValue){
-        //50/50 shot max and min are backwards
         display.transform.localScale = Vector3.Lerp(minScaleVector, maxScaleVector, GetNormalizedValue(newValue));
     }
 

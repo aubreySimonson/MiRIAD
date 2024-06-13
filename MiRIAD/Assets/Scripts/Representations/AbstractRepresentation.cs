@@ -7,7 +7,7 @@ using System;
 /// <summary>
 /// Abstract class which all representations should inherit from.
 /// Mostly for being able to put them all in a list of the same type--
-/// They should be able to have basically nothing in common.
+/// They should be able to have little in common.
 ///
 /// ??--> simonson.au@northeastern.edu
 /// </summary>
@@ -23,12 +23,12 @@ public class AbstractRepresentation : MonoBehaviour
 
     }  
 
+
     //not every node has an id-- this is how we're trying to deal with that    
     public string GetIdInNodeParent(){
-        //return "testing what part breaks things";//runs
         try{
             if(associatedNode == null){
-                return "no associated node!";//this happens? how?
+                return "no associated node!";
             }
             if(associatedNode.nodeID!=null && associatedNode.nodeID!= "could not find id"){
                 return associatedNode.nodeID;
@@ -47,7 +47,7 @@ public class AbstractRepresentation : MonoBehaviour
             }
         }
         catch(Exception e){
-            return "something went wrong in trying to find an ID" + e;//runs
+            return "something went wrong in trying to find an ID" + e;
         }
     }
 

@@ -13,15 +13,20 @@ public class SimpleFloatRepresentation : FloatRepresentation
     public SampleTypeFloat underlyingNode;
 
     //menus should call this after instantiating the relevant prefab. 
-    //this is absolutely feral data architecture and should be refactored later
     public override void Initialize(SampleTypeFloat associatedNode){
-        display.text = "initialize was called";
         SetUnderlyingNode(associatedNode);
-        display.text = "underlying node set";
         SetDisplayValue(associatedNode.lastSampleValue);
         gameObject.transform.localScale = new Vector3(0.022f, 0.022f, 0.022f);
         nodeManager = GameObject.Find("NodeManager").GetComponent<NodeManager>();//a bit fragile
         nodeManager.representations.Add(this);
+    }
+
+    public override void RefreshDisplay(float newValue){
+        SetDisplayValue(newValue);
+    }
+
+    public override void RefreshDisplay(string newValue){
+        SetDisplayValue(float.Parse(newValue));
     }
     public void SetDisplayValue(string newValue){
         display.text = newValue;
