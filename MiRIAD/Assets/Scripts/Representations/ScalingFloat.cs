@@ -29,7 +29,7 @@ public class ScalingFloat : FloatRepresentation
         SetScale(associatedNode.lastSampleValue);
         nodeManager = GameObject.Find("NodeManager").GetComponent<NodeManager>();//a bit fragile
         nodeManager.representations.Add(this);
-        nodeManager.DebugReps();//debugging
+        //nodeManager.DebugReps();//debugging
     }
     public override void RefreshDisplay(float newValue){
         SetDisplayValue(newValue);

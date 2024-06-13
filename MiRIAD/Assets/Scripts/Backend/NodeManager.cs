@@ -28,18 +28,31 @@ public class NodeManager : MonoBehaviour
 
     public XML_Sandbox xML_Sandbox;
     public float refreshRate;//in seconds
+    private bool updatingDisplays = false;//don't start making repeated calls to the server until we're actually trying to display data
      
 
     private int nodesChecked;//for making sure that we actually check all of the nodes when we do things recursively
 
     public List<AbstractRepresentation> representations;
 
-    public void DebugReps(){
-        //debugText.text = representations[0].name;
-        //debugText.text = "node id is : " + representations[0].GetIdInNodeParent();
-        //debugText.text += ". Node value is " + xML_Sandbox.GetNodeInnerText(representations[0].GetIdInNodeParent());//might not work for *thing in wrong generation* reasons
-        InvokeRepeating("RefreshDisplays", 1.0f, 4.0f);
+    void Start(){
+        //make sure that we start with some data
+        StartCoroutine(xML_Sandbox.GetWebData("https://demo.metalogi.io/current"));
     }
+
+    void Update(){
+        if(!updatingDisplays && representations.Count >0){
+            InvokeRepeating("RefreshDisplays", 1.0f, 4.0f);
+            updatingDisplays=true;
+        }
+    }
+
+    // public void DebugReps(){
+    //     //debugText.text = representations[0].name;
+    //     //debugText.text = "node id is : " + representations[0].GetIdInNodeParent();
+    //     //debugText.text += ". Node value is " + xML_Sandbox.GetNodeInnerText(representations[0].GetIdInNodeParent());//might not work for *thing in wrong generation* reasons
+    //     InvokeRepeating("RefreshDisplays", 1.0f, 4.0f);
+    // }
 
     //go and check data only for nodes being used in displays
     //harder to write, but much more efficient if this ever scales
@@ -49,7 +62,7 @@ public class NodeManager : MonoBehaviour
         //iterate over XML and find everything in the displayed IDs list
         foreach(AbstractRepresentation rep in representations){
             debugText.text += xML_Sandbox.GetNodeInnerText(rep.GetIdInNodeParent());
-            
+
             //the following is not the most elegant thing you've ever written
             if(rep is FloatRepresentation){
                 FloatRepresentation repButAFloat = (FloatRepresentation) rep;
