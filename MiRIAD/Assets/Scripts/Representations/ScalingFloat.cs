@@ -36,10 +36,12 @@ public class ScalingFloat : FloatRepresentation
         debugText.text = "a scaling float finished its initialization function";
     }
     public override void RefreshDisplay(float newValue){
+        underlyingNode.AddSample(newValue);
         SetDisplayValue(newValue);
         SetScale(newValue);
     }
     public override void RefreshDisplay(string newValue){
+        underlyingNode.AddSample(float.Parse(newValue));
         SetDisplayValue(float.Parse(newValue));
         SetScale(float.Parse(newValue));
     }

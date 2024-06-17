@@ -22,10 +22,12 @@ public class ThermometerRepresentation : FloatRepresentation
         nodeManager.representations.Add(this);
     }
     public override void RefreshDisplay(float newValue){
+        underlyingNode.AddSample(newValue);
         SetDisplayValue(newValue);
     }
 
     public override void RefreshDisplay(string newValue){
+        underlyingNode.AddSample(float.Parse(newValue));
         SetDisplayValue(float.Parse(newValue));
     }
 
@@ -62,10 +64,17 @@ public class ThermometerRepresentation : FloatRepresentation
         rend.material.mainTextureOffset = newOffset;
     }
 
-    //takes the actual data value and returns a number between 0 and 1
+    //takes the actual data value and returns a number between 0 and 1-- keeps being >1?
     private float GetNormalizedValue(float value){
         float range = underlyingNode.maxVal-underlyingNode.minVal;
+
+        //prevent divide by 0 errors
+        if(range<0.0f){
+            range = 0.001f;
+        }
+
         float normalizedValue = (value-underlyingNode.minVal)/range;
+        Debug.Log("normalized value was " + normalizedValue);
         return normalizedValue;
     }
 }

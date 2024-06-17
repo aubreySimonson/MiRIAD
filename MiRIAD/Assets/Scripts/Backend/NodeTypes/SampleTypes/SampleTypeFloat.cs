@@ -16,4 +16,20 @@ public class SampleTypeFloat : SampleType
     public float total;//mostly useful for calculating the average
 
     public float lastSampleValue;
+
+    //incorporate more data related to this node
+    public void AddSample(float newSample){
+        if(newSample<minVal){
+            minVal = newSample;
+        }
+        if(newSample>maxVal){
+            maxVal = newSample;
+        }
+
+        total += newSample;
+        numberOfSamples++;
+        meanVal = total/numberOfSamples;
+
+        lastSampleValue = newSample;
+    }
 }
