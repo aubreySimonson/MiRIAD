@@ -40,7 +40,8 @@ public class ThermometerRepresentation : FloatRepresentation
     }
 
     public void SetUnderlyingNode(SampleTypeFloat node){
-        underlyingNode = node;
+        underlyingNode = node;//this one is a sampletypefloat
+        associatedNode = node;//samething, but its an abstract node
     }
 
     public void Recalculate(){

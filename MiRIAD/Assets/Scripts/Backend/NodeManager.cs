@@ -42,21 +42,15 @@ public class NodeManager : MonoBehaviour
 
     void Update(){
         if(!updatingDisplays && representations.Count >0){
+            debugText.text = "refresh displays started by " + representations[0].name;
             InvokeRepeating("RefreshDisplays", 1.0f, 4.0f);
             updatingDisplays=true;
         }
     }
 
-    // public void DebugReps(){
-    //     //debugText.text = representations[0].name;
-    //     //debugText.text = "node id is : " + representations[0].GetIdInNodeParent();
-    //     //debugText.text += ". Node value is " + xML_Sandbox.GetNodeInnerText(representations[0].GetIdInNodeParent());//might not work for *thing in wrong generation* reasons
-    //     InvokeRepeating("RefreshDisplays", 1.0f, 4.0f);
-    // }
-
     //go and check data only for nodes being used in displays
-    //harder to write, but much more efficient if this ever scales
     public void RefreshDisplays(){
+        debugText.text += "refreshing display";
         //get data from remote-- the syncing on these is definitely going to be kind of weird
          StartCoroutine(xML_Sandbox.GetWebData("https://demo.metalogi.io/current"));
         //iterate over XML and find everything in the displayed IDs list

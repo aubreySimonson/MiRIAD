@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ScalingFloat : FloatRepresentation
 {
@@ -14,6 +15,7 @@ public class ScalingFloat : FloatRepresentation
 
     //different from associated node, which is the same thing, but stored as an abstract node
     public SampleTypeFloat underlyingNode;
+    public Text debugText;
 
 
 
@@ -23,13 +25,15 @@ public class ScalingFloat : FloatRepresentation
 
     //menus should call this after instantiating the relevant prefab. 
     public override void Initialize(SampleTypeFloat associatedNode){
+        debugText = GameObject.Find("Debug").GetComponent<Text>();
+        debugText.text = "a scaling float was initialized.";
         SetUnderlyingNode(associatedNode);
         SetDisplayValue(associatedNode.lastSampleValue);
         PrecompileVectors();//we shouldn't have to do this again when things update-- just the once
         SetScale(associatedNode.lastSampleValue);
         nodeManager = GameObject.Find("NodeManager").GetComponent<NodeManager>();//a bit fragile
         nodeManager.representations.Add(this);
-        //nodeManager.DebugReps();//debugging
+        debugText.text = "a scaling float finished its initialization function";
     }
     public override void RefreshDisplay(float newValue){
         SetDisplayValue(newValue);

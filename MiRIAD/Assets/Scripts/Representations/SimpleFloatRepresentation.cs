@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 
 public class SimpleFloatRepresentation : FloatRepresentation
@@ -9,11 +10,14 @@ public class SimpleFloatRepresentation : FloatRepresentation
 
     public TextMeshPro display;
 
+    public Text debugText;
+
     //Spaghetti, but might be useful when all of the parts do actually have to talk to eachother
     public SampleTypeFloat underlyingNode;
 
     //menus should call this after instantiating the relevant prefab. 
     public override void Initialize(SampleTypeFloat associatedNode){
+        debugText = GameObject.Find("Debug").GetComponent<Text>();
         SetUnderlyingNode(associatedNode);
         SetDisplayValue(associatedNode.lastSampleValue);
         gameObject.transform.localScale = new Vector3(0.022f, 0.022f, 0.022f);
@@ -26,8 +30,9 @@ public class SimpleFloatRepresentation : FloatRepresentation
     }
 
     public override void RefreshDisplay(string newValue){
-        SetDisplayValue(float.Parse(newValue));
+        SetDisplayValue(newValue);
     }
+
     public void SetDisplayValue(string newValue){
         display.text = newValue;
     }
@@ -37,6 +42,7 @@ public class SimpleFloatRepresentation : FloatRepresentation
     }
 
     public void SetUnderlyingNode(SampleTypeFloat node){
-        underlyingNode = node;
+        underlyingNode = node;//this one is a sampletypefloat
+        associatedNode = node;//samething, but its an abstract node
     }
 }
