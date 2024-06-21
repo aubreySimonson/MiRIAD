@@ -19,10 +19,11 @@ using System;//for try/catch blocks
 
 public class MTConnectParser : MonoBehaviour
 {
-  public enum RemoteURL {SMSTestbed, Metalogi};
-  public RemoteURL remote;
+  //public enum RemoteURL {SMSTestbed, Metalogi};
+  //public RemoteURL remote;
   public bool useStaticSampleData;//if true, load from a file. Otherwise, look at the url. Not working rn because we don't have any static sample data.
   public ServerTalker serverTalker;//this is a script where we hide all of our code related to getting anything from the internet.
+  public URLManager uRLManager;
   
   public string remoteUrl = ""; 
   public string fileName;//this should be just the name of the file, with no type extension. Put the file in the Resources folder.
@@ -47,12 +48,13 @@ public class MTConnectParser : MonoBehaviour
 
   void Awake(){//awake runs before the first frame, so that other things can use this data
     //fancy switcher to make it easier to try different URLs
-    if(remote == RemoteURL.Metalogi){
-      remoteUrl="https://demo.metalogi.io/current";
-    }
-    else{
-      remoteUrl = "https://smstestbed.nist.gov/vds/current";
-    }
+    // if(remote == RemoteURL.Metalogi){
+    //   remoteUrl="https://demo.metalogi.io/current";
+    // }
+    // else{
+    //   remoteUrl = "https://smstestbed.nist.gov/vds/current";
+    // }
+    remoteUrl = uRLManager.urls[uRLManager.urlIndex];
     ReadSampleData();
   }
 

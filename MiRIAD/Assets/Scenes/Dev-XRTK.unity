@@ -800,6 +800,7 @@ GameObject:
   - component: {fileID: 160214833}
   - component: {fileID: 160214832}
   - component: {fileID: 160214834}
+  - component: {fileID: 160214835}
   m_Layer: 0
   m_Name: NodeManager
   m_TagString: Untagged
@@ -826,6 +827,7 @@ MonoBehaviour:
   xML_Sandbox: {fileID: 160214834}
   refreshRate: 0
   representations: []
+  uRLManager: {fileID: 160214835}
 --- !u!4 &160214833
 Transform:
   m_ObjectHideFlags: 0
@@ -853,6 +855,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e3e7e870ea64678a93072acd59af39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &160214835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160214831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7bde460421c401b87da2686a4374ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  urls:
+  - https://demo.metalogi.io/current
+  - https://smstestbed.nist.gov/vds/current
+  urlIndex: 1
 --- !u!1001 &170632160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2721,9 +2739,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b0594a55df4409b8e74b75e9a86db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  remote: 1
   useStaticSampleData: 0
   serverTalker: {fileID: 432100175}
+  uRLManager: {fileID: 160214835}
   remoteUrl: 
   fileName: severalFrames.txt
   nodePrefab: {fileID: 153911927606555916, guid: ed67a62ae279f4048aea57002267a7a3, type: 3}
@@ -2752,6 +2770,7 @@ MonoBehaviour:
   xML_Sandbox: {fileID: 0}
   refreshRate: 0
   representations: []
+  uRLManager: {fileID: 0}
 --- !u!1 &442043986
 GameObject:
   m_ObjectHideFlags: 0
