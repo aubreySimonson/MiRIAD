@@ -11,15 +11,16 @@ using System.Linq;
 using System.Xml.Linq;
 
 //a script for safely playing around with MTConnect data without wrecking our parser
-//this may eventually grow into a better parser
+//this may eventually grow into a better parser-- it did not, but it is now actively in use
 
 public class XML_Sandbox : MonoBehaviour
 {
     XDocument xDoc;
+    public URLManager uRLManager;
     
     void Start()
     {
-        StartCoroutine(GetWebData("https://demo.metalogi.io/current"));//<--this works.
+        StartCoroutine(GetWebData(uRLManager.urls[uRLManager.urlIndex]));//<--this works.
     }
 
     public IEnumerator GetWebData(string address){

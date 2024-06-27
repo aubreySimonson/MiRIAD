@@ -34,10 +34,11 @@ public class NodeManager : MonoBehaviour
     private int nodesChecked;//for making sure that we actually check all of the nodes when we do things recursively
 
     public List<AbstractRepresentation> representations;
+    public URLManager uRLManager;
 
     void Start(){
         //make sure that we start with some data
-        StartCoroutine(xML_Sandbox.GetWebData("https://demo.metalogi.io/current"));
+        StartCoroutine(xML_Sandbox.GetWebData(uRLManager.urls[uRLManager.urlIndex]));
     }
 
     void Update(){
@@ -52,7 +53,7 @@ public class NodeManager : MonoBehaviour
     public void RefreshDisplays(){
         debugText.text += "refreshing display";
         //get data from remote-- the syncing on these is definitely going to be kind of weird
-         StartCoroutine(xML_Sandbox.GetWebData("https://demo.metalogi.io/current"));
+         StartCoroutine(xML_Sandbox.GetWebData(uRLManager.urls[uRLManager.urlIndex]));
         //iterate over XML and find everything in the displayed IDs list
         foreach(AbstractRepresentation rep in representations){
             debugText.text += xML_Sandbox.GetNodeInnerText(rep.GetIdInNodeParent());
