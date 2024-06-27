@@ -14,6 +14,6 @@ using UnityEngine;
 
 public class URLManager : MonoBehaviour
 {
-    public List<string> urls = new List<string>(){"https://demo.metalogi.io/current", "https://smstestbed.nist.gov/vds/current"};
+    public List<string> urls = new List<string>(){"https://demo.metalogi.io/current", "https://smstestbed.nist.gov/vds/current", "http://192.168.50.8:5000/current"};
     public int urlIndex;
 }

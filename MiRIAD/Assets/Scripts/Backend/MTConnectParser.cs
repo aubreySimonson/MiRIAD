@@ -26,14 +26,13 @@ public class MTConnectParser : MonoBehaviour
   public URLManager uRLManager;
   
   public string remoteUrl = ""; 
-  public string fileName;//this should be just the name of the file, with no type extension. Put the file in the Resources folder.
 
   public GameObject nodePrefab;
 
   public bool collapseDuplicateSamples;//do this whenever you have a lot of data-- for example, time-series data-- to prevent your computer from freezing
 
   public int totalNodes = 0;//we don't use this information for anything, but it's cool to know
-  public Text debugText;//leaving this null won't throw errors or break anything
+  public Text debugText;//leaving this null won't throw errors or break anything because we are doing responsible null checking
 
   public GameObject rootNode;
   public NodeManager nodeManager;//spaghetti, but having connections both ways makes it easier to deal with async stuff
@@ -61,6 +60,7 @@ public class MTConnectParser : MonoBehaviour
 #region get data
 
   public void ReadSampleData(){
+    Debug.Log("reading sample data");
     if(useStaticSampleData){
       LoadStaticSampleData();
     }
@@ -77,7 +77,16 @@ public class MTConnectParser : MonoBehaviour
     XmlDocument xmlDoc = new XmlDocument();
     xmlDoc.LoadXml(data);
     XmlNodeList metaLevelNodes = xmlDoc.ChildNodes;
-    XmlNode topLevelNode = metaLevelNodes[2];//the first 2 are metadata
+
+    //throw out metadata--the right element thus far has always been [1] or [2]
+    //this is pretty fragile and should probably be made more robust at some point
+    XmlNode topLevelNode;
+    if(metaLevelNodes[1].ToString()== "System.Xml.XmlElement"){
+      topLevelNode = metaLevelNodes[1];
+    }
+    else{
+      topLevelNode = metaLevelNodes[2];
+    }
     XmlNodeList topLevelNodes = topLevelNode.ChildNodes;
     XmlNode allContent = topLevelNodes[1];
     CreateNodeGameObject(allContent, true);
@@ -87,7 +96,6 @@ public class MTConnectParser : MonoBehaviour
 
   private void LoadStaticSampleData(){
     XmlDocument xmlDoc = new XmlDocument();
-    //textAsset = (TextAsset)Resources.Load(fileName, typeof(TextAsset));
     xmlDoc.LoadXml ( textAsset.text );
     XmlNodeList topLevelNodes = xmlDoc.ChildNodes;
     XmlNode allContent = topLevelNodes[1];
